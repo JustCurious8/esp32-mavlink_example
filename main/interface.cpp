@@ -35,7 +35,7 @@ void Autopilot_Interface::read_messages()
 { 
   mavlink_message_t message;
   mavlink_status_t status;
-  int len = uart_read_bytes(UART_NUM_1, &data, 1, 20 / portTICK_RATE_MS);
+  int len = uart_read_bytes(UART_NUM_2, &data, 1, 20 / portTICK_RATE_MS);
 
   if(len>0) 
   {
@@ -116,8 +116,8 @@ int Autopilot_Interface::set_message_interval()
   // Translate message to buffer
   unsigned len = mavlink_msg_to_send_buffer((uint8_t*)buf, &message);
   
-  uart_write_bytes(UART_NUM_1, (const char *)buf, (uint8_t)len);
-  uart_write_bytes(UART_NUM_1, (const char *)"\n", sizeof("\n"));
+  uart_write_bytes(UART_NUM_2, (const char *)buf, (uint8_t)len);
+  uart_write_bytes(UART_NUM_2, (const char *)"\n", sizeof("\n"));
   return len;
 }
 
